@@ -277,13 +277,13 @@ func (ca *CAImpl) newCertificate(domains []string, ips []net.IP, key crypto.Publ
 		}
 	}
 
-	certNotAfter := time.Now().AddDate(5, 0, 0)
-	if notAfter != "" {
-		certNotAfter, err = time.Parse(time.RFC3339, notAfter)
-		if err != nil {
-			return nil, fmt.Errorf("cannot parse Not After date: %w", err)
-		}
-	}
+	certNotAfter := time.Now().Add(time.Hour * 1)
+	// if notAfter != "" {
+	// 	certNotAfter, err = time.Parse(time.RFC3339, notAfter)
+	// 	if err != nil {
+	// 		return nil, fmt.Errorf("cannot parse Not After date: %w", err)
+	// 	}
+	// }
 
 	serial := makeSerial()
 	template := &x509.Certificate{
